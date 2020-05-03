@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Recipe Test - connecting to recipe puppy</title>
+</head>
+<body>
+    <div class="wrapper">
+        <form class="search" autocomplete="off">
+            <input type="text" name="query" value="pizza">
+            <button disabled="" type="submit">Submit</button>
+        </form>
+    </div>
+    <script>//have a parcel package for this to fix CORS
+// regenerator run time - babel - takes your js and back compatibility it. Transpiles your code.
+// we need to tell babel to tnot transpile assync await
+// we are using a proxy to step over CORS as well. Makes a server side request. Proxy will send us data. CORS PROXY. 
+// https://cors-anywhere.herokuapp.com/
+// never use above for anything with passwords
+const baseEndpoint = 'http://www.recipepuppy.com/api';
+const proxy = 'https://cors-anywhere.herokuapp.com/';
+const form = document.querySelector('form.search');
+console.log('working'); // query params always start with a question mark
+// additional params have an ampersand between them. 
+// api's aren't standardized
+
+async function fetchRecipes(query) {
+  const response = await fetch(`${proxy}${baseEndpoint}?q=${query}`);
+  const data = await response.json();
+  console.log(data);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  console.log(event.currentTarget.query.value);
+}
+
+form.addEventListener('submit', handleSubmit);
+fetchRecipes('pizza');</script>
+</body>
+</html>
