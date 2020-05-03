@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Recipe Test</title>
+    <title>API Recipe Test - connecting to recipe puppy</title>
 </head>
 <body>
-    
+    <script>
+        const baseEndpoint = 'http://www.recipepuppy.com/api';
+        console.log('working');
+        // query params always start with a question mark
+        // additional params have an ampersand between them. 
+        // api's aren't standardized
+        async function fetchRecipes(query){
+            const res = await fetch(`${baseEndpoint}?q=${query}`);
+            const data = await response.json();
+        }
+
+        fetchRecipes('pizza');
+    </script>
 </body>
 </html>
